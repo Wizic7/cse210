@@ -4,21 +4,17 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Learning05 World!");
+        Rectangle Reggie = new Rectangle(2.5, 16, "Purple");
+        Circle McQueen = new Circle(3, "Rustee Red");
+        Square Maytor = new Square(3, "Brown");
+        List<Shape> shapes = [Reggie, McQueen, Maytor];
 
-        double interest = .02;
-        double x = 50000;
-        double y = x * interest;
-        int count = 0;
-        while (y < 10000)
+        foreach (Shape shape in shapes)
         {
-            count++;
-            x = x + y;
-            y = x * interest;
-            Console.WriteLine("Account: " + x);
-            Console.WriteLine("Interest: " + y);
-            // Console.ReadLine();
+            
+            Console.WriteLine(shape.GetColor());
+            Console.WriteLine(shape.GetArea());
         }
-        Console.WriteLine("" + count);
+
     }
 }
