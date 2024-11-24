@@ -1,10 +1,15 @@
 class ChecklistGoal : Goal
 {
-    private int _bonusPoints;
+
 public ChecklistGoal() : base("checklist")
 {
-    _maxCompletions = GetValidIntFromPrompt("How many times does this goal need to be completed for a bonus?");
-    _bonusPoints = GetValidIntFromPrompt("What is the amount of points for completing this goal that many times");
+    _maxCompletions = GetValidIntFromPrompt("How many times does this goal need to be completed for a bonus? ");
+    _bonusPoints = GetValidIntFromPrompt("What is the amount of points for completing this goal that many times? ");
+}
+
+public ChecklistGoal(string[] Json) : base("checklist", Json)
+{
+    
 }
 public override string DisplayInfo()
 {
@@ -34,3 +39,4 @@ public override int GetPoints()
         }
     }
 }
+

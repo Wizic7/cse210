@@ -64,6 +64,7 @@ class Program
                             count++;
                             Console.WriteLine( count + ". " + goal.DisplayInfo());
                         }
+                        Console.ReadLine();
                         break;
                     //Save Goals
                     case 3:
@@ -84,10 +85,26 @@ class Program
                         filename = Console.ReadLine();
                         string[] lines = System.IO.File.ReadAllLines(filename);
                         total_points = Int32.Parse(lines[0]);
-                        string JSON = "";
                         for (int i = 1; i< lines.Length; i++) 
                         {
-                            JSON += lines[i].Trim();
+                            string line = lines[i];
+                            int collinIndex = line.IndexOf(":") + 1;
+                            int commaIndex = line.IndexOf(",");
+                            string goalType = line.Substring(collinIndex, commaIndex-collinIndex);
+                            line = line.Substring(1, line.Length - 2);
+                            string[] json = line.Split(",");
+                            switch (goalType)
+                            {
+                                case "simple":
+                                    goal_list.Add(new SimpleGoal(json));
+                                    break;
+                                case "eternal":
+                                    goal_list.Add(new EternalGoal(json));
+                                    break;
+                                case "checklist":
+                                    goal_list.Add(new ChecklistGoal(json));
+                                    break;
+                            }
                         }
                         break;
                     //Record Event

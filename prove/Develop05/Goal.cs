@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Dynamic;
 using System.Text.Json;
 
@@ -10,6 +11,9 @@ protected int _timesCompleted;
 private int _points;
 protected int _maxCompletions;
 
+//Only here for JSON is used in ChecklistGoal only
+    protected int _bonusPoints;
+
 public Goal(string goalType)
 {
     _goalType = goalType;
@@ -18,6 +22,39 @@ public Goal(string goalType)
     Console.Write("What is a short description of your goal? ");
     _description = Console.ReadLine();
     _points = GetValidIntFromPrompt("How many points are associated with this goal? ");
+}
+
+public Goal(string goalType, string[] json)
+{
+    _goalType = goalType;
+    foreach (string item in json)
+    {
+        int collinIndex = item.IndexOf(':');
+        string name = item.Substring(0, collinIndex);
+        string value = item.Substring(collinIndex+1);
+        switch(name)
+        {
+            case "'_name'":
+                _name = value;
+                break;
+            case "'_description'":
+                _description = value;
+                break;
+            case "'_times_completed'":
+                _timesCompleted = Int32.Parse(value);
+                break;
+            case "'_points'":
+                _points = Int32.Parse(value);
+                break;
+            case "'_maxCompletions'":
+                _maxCompletions = Int32.Parse(value);
+                break;
+            case "'_bonuspoints'":
+                _bonusPoints = Int32.Parse(value);
+                break;
+        }
+    }
+    
 }
 
 public string DisplayName(){
@@ -40,7 +77,7 @@ protected virtual string[] CreateJson()
         "'_description':" + _description,
         "'_times_completed':" + _timesCompleted,
         "'_points':" + _points,
-        "'_maxCompletions:'" + _maxCompletions
+        "'_maxCompletions':" + _maxCompletions
     ];
 }
 
@@ -51,13 +88,10 @@ public string getJSON(){
     {
         output+= line + ",";
     }
-    return "[" + output + "]";
+    //remove extra comma with -1
+    return "[" + output.Substring(0,output.Length-1) + "]";
 }
 
-public virtual void DecomposeJSON(string jsonString){
-    Goal goal = JsonSerializer.Deserialize<Goal>(jsonString)!;
-    Console.WriteLine("" + goal._name);
-}
 public virtual int GetPoints()
 {
     return _points * _timesCompleted;

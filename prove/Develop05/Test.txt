@@ -1,0 +1,5 @@
+500
+['_goalType':simple,'_name':TestS,'_description':Testing a simple goal,'_times_completed':1,'_points':50,'_maxCompletions':1]
+['_goalType':eternal,'_name':TestE,'_description':Test Eternal Goal,'_times_completed':5,'_points':50,'_maxCompletions':2147483647]
+['_goalType':checklist,'_name':TestC,'_description':Test checklist goal,'_times_completed':2,'_points':50,'_maxCompletions':2,'_bonuspoints':100]
+['_goalType':checklist,'_name':Test Save,'_description':Test if new Save works,'_times_completed':0,'_points':500,'_maxCompletions':100,'_bonuspoints':1]
