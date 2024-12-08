@@ -24,6 +24,11 @@ abstract class Character
         return _defense;
     }
 
+    public string getName()
+    {
+        return _name;
+    }
+
     public LifeBarData GetLifeBarData()
     {
         return _lifeBar;
