@@ -1,0 +1,2 @@
+1. Fireball - does 2x damage and ignores defense
+2. Earthquake - does 1/2 of enemy max health
