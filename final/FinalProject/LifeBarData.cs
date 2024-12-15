@@ -24,6 +24,11 @@ class LifeBarData {
     {
         return _current_health;
     }
+
+    public int getMaxHealth()
+    {
+        return _total_health;
+    }
     public void increaseMaxHealth(int change)
     {
         _total_health += change;

@@ -21,7 +21,7 @@ class DamageCalculator
         //Does Max-health Damage & ignores armor
         else if(skill == 2)
         {
-            return defender.GetLifeBarData()._total_health/2;
+            return defender.GetLifeBarData().getMaxHealth()/2;
         }
         return 0;
     }
