@@ -24,11 +24,11 @@ class PlayerData : Character
 
     public void resetHealth()
     {
-        GetLifeBarData()._current_health = GetLifeBarData()._total_health;
+        GetLifeBarData().resetHealth();
     }
     public void LevelUp()
     {
-        GetLifeBarData()._total_health += 30;
+        GetLifeBarData().increaseMaxHealth(30);
     }
     public LevelSystem getLevelSystem()
     {
@@ -44,6 +44,6 @@ class PlayerData : Character
         Console.WriteLine("Exp: " + _level.getExp());
         Console.WriteLine("Attack: " + getAttack());
         Console.WriteLine("Defense: " + getDefense());
-        Console.WriteLine("Health: " + GetLifeBarData()._total_health + "/" + GetLifeBarData()._total_health);
+        Console.WriteLine("Health: " + GetLifeBarData().displayLife());
     }
 }

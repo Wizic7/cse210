@@ -39,7 +39,7 @@ class Encounter
         SpawnEnemies(enemyCount);
         for(int i = 0; i < enemyCount; i++)
         {
-            _enemyList.Add(new Enemy(enemy.getName(), enemy.getAttack(), enemy.getDefense(), enemy.GetLifeBarData()._total_health, enemy.getEXPValue()));
+            _enemyList.Add(new Enemy(enemy.getName(), enemy.getAttack(), enemy.getDefense(), enemy.GetLifeBarData().getHealth(), enemy.getEXPValue()));
         }
         SpawnPlayer();
         _encounterFinished = false;
@@ -70,7 +70,7 @@ class Encounter
         SpawnEnemies(_enemyCount);
         for(int i = 0; i < _enemyCount; i++)
         {
-            _enemyList.Add(new Enemy(enemy.getName(), enemy.getAttack(), enemy.getDefense(), enemy.GetLifeBarData()._total_health, enemy.getEXPValue()));
+            _enemyList.Add(new Enemy(enemy.getName(), enemy.getAttack(), enemy.getDefense(), enemy.GetLifeBarData().getHealth(), enemy.getEXPValue()));
         }
         SpawnPlayer();
         _encounterFinished = false;
@@ -156,10 +156,10 @@ class Encounter
         string printBoard = new string(_board);
         Console.Clear();
         Console.WriteLine(printBoard);
-        Console.WriteLine(_player.getName() + ": " + _player.GetLifeBarData()._current_health + "/" + _player.GetLifeBarData()._total_health);
+        Console.WriteLine(_player.getName() + ": " + _player.GetLifeBarData().displayLife());
         if(isFighting)
         {
-            Console.WriteLine(_enemyList[0].getName() + ": " + _enemyList[0].GetLifeBarData()._current_health + "/" + _enemyList[0].GetLifeBarData()._total_health);
+            Console.WriteLine(_enemyList[0].getName() + ": " + _enemyList[0].GetLifeBarData().displayLife());
         }
     }
 
@@ -264,7 +264,7 @@ class Encounter
         SpawnEnemies(_enemyCount);
         for(int i = 0; i < _enemyCount; i++)
         {
-            _enemyList.Add(new Enemy(_enemy.getName(), _enemy.getAttack(), _enemy.getDefense(), _enemy.GetLifeBarData()._total_health, _enemy.getEXPValue()));
+            _enemyList.Add(new Enemy(_enemy.getName(), _enemy.getAttack(), _enemy.getDefense(), _enemy.GetLifeBarData().getHealth(), _enemy.getEXPValue()));
         }
         SpawnPlayer();
         _encounterFinished = false;

@@ -1,6 +1,8 @@
+using System.Runtime.CompilerServices;
+
 class LifeBarData {
-    public int _current_health;
-    public int _total_health;
+    private int _current_health;
+    private  int _total_health;
     public LifeBarData(int health, int totalhealth) 
     {
         _current_health = health;
@@ -16,6 +18,25 @@ class LifeBarData {
     public Boolean isAlive()
     {
         return _current_health > 0;
+    }
+
+    public int getHealth()
+    {
+        return _current_health;
+    }
+    public void increaseMaxHealth(int change)
+    {
+        _total_health += change;
+    }
+
+    public string displayLife()
+    {
+        return _current_health + "/" + _total_health;
+    }
+
+    public void resetHealth()
+    {
+        _current_health = _total_health;
     }
 
     public void changeLife(int change)
