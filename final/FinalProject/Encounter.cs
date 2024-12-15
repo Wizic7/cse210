@@ -1,3 +1,5 @@
+using System.ComponentModel;
+
 class Encounter
 {
     public PlayerData _player;
@@ -26,10 +28,12 @@ class Encounter
         _baseEnemyCount = enemyCount;
         _maxEnemyCount = enemyCount;
         _enemyList = new List<Enemy>();
+
+        int playerSize = _player.displayCharacter().Length + 1;
         //Account for some strange scenario where the boardsize sent is too small
-        if(_boardSize < 3 + enemyCount * enemy.displayCharacter().Length)
+        if(_boardSize < playerSize + enemyCount * enemy.displayCharacter().Length)
         {
-            _boardSize = 3 + enemyCount * enemy.displayCharacter().Length;
+            _boardSize = playerSize + enemyCount * enemy.displayCharacter().Length;
         }
 
         _board = Enumerable.Repeat('_', _boardSize).ToArray();
@@ -57,10 +61,11 @@ class Encounter
         Random rng = new Random();
         _enemyCount = rng.Next(_baseEnemyCount, _maxEnemyCount);
         _enemyList = new List<Enemy>();
+        int playerSize = _player.displayCharacter().Length + 1;
         //Account for some strange scenario where the boardsize sent is too small
-        if(_boardSize < 3 + _enemyCount * enemy.displayCharacter().Length)
+        if(_boardSize < playerSize + _enemyCount * enemy.displayCharacter().Length)
         {
-            _boardSize = 3 + _enemyCount * enemy.displayCharacter().Length;
+            _boardSize = playerSize + _enemyCount * enemy.displayCharacter().Length;
         }
 
         _board = Enumerable.Repeat('_', _boardSize).ToArray();
@@ -91,14 +96,15 @@ class Encounter
         //To make sure none overlap, take a random starting position and then add the width of the name plus a random integer from 0-2
         //Enemy position = last placed enemy position + enemy width + rng(0-3)
         Random rng = new Random();
-        int spawnPosition = 3;
+        int spawnPosition = 4;
         char[] name = _enemy.displayCharacter();
         int enemySize = name.Length;
         int extraSpaces = -1;
+        int playerSize = _player.displayCharacter().Length + 1;
         while(extraSpaces < 0)
         {
-            if(count * enemySize + 3 < _boardSize-2)
-                spawnPosition = rng.Next(3, Convert.ToInt32(_boardSize / count));
+            if(count * enemySize + playerSize < _boardSize-2)
+                spawnPosition = rng.Next(playerSize, Convert.ToInt32(_boardSize / count));
 
             extraSpaces = _boardSize - spawnPosition - enemySize * count;
             // Console.WriteLine("We found " + extraSpaces + " extra spaces for " + count + " enemies!");
@@ -117,7 +123,13 @@ class Encounter
                 spawnPosition++;
             }
             count--;
-            if(extraSpaces > 0)
+            if(extraSpaces > 2)
+            {
+                int skippedSpaces = rng.Next(0,Convert.ToInt32(extraSpaces/2));
+                spawnPosition += skippedSpaces;
+                extraSpaces -= skippedSpaces;
+            }
+            else if(extraSpaces > 0)
             {
                 int skippedSpaces = rng.Next(0,extraSpaces);
                 spawnPosition += skippedSpaces;
@@ -228,18 +240,19 @@ class Encounter
 
     private void clearFromBoard(int position, int spaces)
     {
-        Console.WriteLine("Removing enemy at position " + position + ". They are " + spaces + " large");
+        // Console.WriteLine("Removing enemy at position " + position + ". They are " + spaces + " large");
         for(int i = 0; i < spaces; i++)
         {
+            // Console.WriteLine("At the " + i+position + " spot int the array there is a " + _board[position + i]);
             _board[position + i] = '_';
+            // Console.WriteLine("Now it is a: " + _board[position + 1]);
         }
-        Thread.Sleep(400);
     }
 
     public void resetEncounter()
     {
         _enemyList.Clear();
-
+        int playerSize = _player.displayCharacter().Length + 1;
         if(_maxEnemyCount > _baseEnemyCount)
         {
             Random rng = new Random();
@@ -248,14 +261,16 @@ class Encounter
 
         _boardSize = _baseboardSize;
         //Account for some strange scenario where the boardsize sent is too small
-        if(_boardSize < 3 + _enemyCount * _enemy.displayCharacter().Length)
+        if(_boardSize < playerSize + _enemyCount * _enemy.displayCharacter().Length)
         {
-            _boardSize = 3 + _enemyCount * _enemy.displayCharacter().Length;
+            _boardSize = playerSize + _enemyCount * _enemy.displayCharacter().Length;
         }
 
+        _board = [];
         char[] newBoard = Enumerable.Repeat('_', _boardSize).ToArray();
         _board = newBoard;
 
+        _enemyPosition = [];
         int[] newEnemyPositions = Enumerable.Repeat(0, _enemyCount).ToArray();
         _enemyPosition = newEnemyPositions;
 
