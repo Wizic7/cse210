@@ -1,0 +1,11 @@
+Encounter Name, Board Size, Enemy count, MaxEnemy Count, Enemy Name, Enemy Attack, Enemy Defense, Enemy Life, Enemy Exp
+Goblin Forest, 30, 3, 20, Goblin, 3, 1, 10, 2
+Ruined Town, 30, 4, 10, Dog, 10, 3, 5, 3
+Twisted Path, 30, 3, 5, Skeleton, 15, 10, 30, 6
+Shocking Shores, 60, 2, 20, Eel, 17, 1, 10, 7
+Capital Cove, 50, 5, 10, Bat, 20, 10, 10, 12
+Mimic Mines, 15, 1, 1, \o/, 30, 60, 100, 80
+Possessed Path, 70, 7, 15, Ghost, 35, 0, 40, 40
+Castle Gates, 30, 5, 10, Knight, 40, 20, 240, 100
+Castle, 20, 2, 5, Wizard, 70, 10, 200, 350
+ThroneRoom, 20, 1, 1, Necromancer, 80, 30, 1000, 1000
