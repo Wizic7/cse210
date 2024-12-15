@@ -1,10 +1,12 @@
 class DamageCalculator
 {
-    public static int calculateDamage(int attack, int defense)
+    public static int calculateDamage(Character attacker, Character defender)
     {
+        int attack = attacker.getAttack();
+        int defense = defender.getDefense();
         if(attack - defense < 0)
         {
-            return 0;
+            return 1;
         }
         return attack - defense;
     }

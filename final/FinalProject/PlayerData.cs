@@ -7,8 +7,43 @@ class PlayerData : Character
         _level = new LevelSystem();
     }
 
-    public override void displayCharacter()
+    public override char[] displayCharacter()
     {
-        throw new NotImplementedException();
+        return "\\o/".ToCharArray();
+    }
+
+    public override int getAttack()
+    {
+        return base.getAttack() * _level.getLevel();
+    }
+
+    public override int getDefense()
+    {
+        return base.getDefense() + _level.getLevel();
+    }
+
+    public void resetHealth()
+    {
+        GetLifeBarData()._current_health = GetLifeBarData()._total_health;
+    }
+    public void LevelUp()
+    {
+        GetLifeBarData()._total_health += 30;
+    }
+    public LevelSystem getLevelSystem()
+    {
+        return _level;
+    }
+
+    public void displayStats()
+    {
+        Console.Clear();
+        Console.WriteLine(_name);
+        Console.WriteLine("\\o/");
+        Console.WriteLine("Level: " + _level.getLevel());
+        Console.WriteLine("Exp: " + _level.getExp());
+        Console.WriteLine("Attack: " + getAttack());
+        Console.WriteLine("Defense: " + getDefense());
+        Console.WriteLine("Health: " + GetLifeBarData()._total_health + "/" + GetLifeBarData()._total_health);
     }
 }

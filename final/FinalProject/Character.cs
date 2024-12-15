@@ -1,11 +1,11 @@
 abstract class Character
 {
-    private string _name;
+    protected string _name;
     private int _attack;
     private int _defense;
     private LifeBarData _lifeBar;
 
-    public abstract void displayCharacter();
+    public abstract char[] displayCharacter();
     public Character(string name, int attack, int defense, int max_life)
     {
         _name = name;
@@ -14,12 +14,12 @@ abstract class Character
         _lifeBar = new LifeBarData(max_life);
     }
 
-    public int getAttack()
+    public virtual int getAttack()
     {
         return _attack;
     }
 
-    public int getDefense()
+    public virtual int getDefense()
     {
         return _defense;
     }

@@ -14,14 +14,15 @@ class LevelSystem
         _level_Threshold = _level * 10;
     }
 
-    public void gainExp(int value)
+    public void gainExp(PlayerData player, int value)
     {
         _exp += value;
-        if( _level_Threshold <= _exp)
+        while( _level_Threshold <= _exp)
         {
             _level++;
             _exp -= _level_Threshold;
             _level_Threshold = Convert.ToInt32(_level_Threshold * 1.5);
+            player.LevelUp();
         }
     }
 
@@ -30,4 +31,8 @@ class LevelSystem
         return _level;
     }
 
+    public string getExp()
+    {
+        return _exp + "/" + _level_Threshold;
+    }
 }
